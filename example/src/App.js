@@ -1,10 +1,19 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { WProvider } from 'redux-wired'
 
-import { ExampleComponent } from 'redux-wired'
-import 'redux-wired/dist/index.css'
+import Store from './redux/store'
+import Component from './Component'
+import Wired from './redux/wired'
 
-const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+function App() {
+  return (
+    <Provider store={Store}>
+      <WProvider wired={Wired}>
+        <Component />
+      </WProvider>
+    </Provider>
+  )
 }
 
 export default App

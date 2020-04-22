@@ -1,12 +1,13 @@
 {
   "name": "redux-wired-example",
-  "homepage": "https://Hernan Paris.github.io/redux-wired",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
+    "react-redux": "^7.2.0",
     "react-scripts": "link:../node_modules/react-scripts",
+    "redux": "^4.0.5",
     "redux-wired": "link:.."
   },
   "scripts": {
@@ -14,9 +15,6 @@
     "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
     "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
