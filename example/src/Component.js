@@ -5,11 +5,12 @@ import { wiredUp } from 'redux-wired'
 
 const Component = ({
   value,
+  doUpdateText,
   doUpdateValue,
   text,
-  doUpdateText,
-  buttonText = 'Button Text',
+  buttonText
 }) => {
+
   function handleButtonClick() {
     const newValue = value + 1
     doUpdateValue(newValue)
@@ -26,6 +27,14 @@ const Component = ({
       <input value={text} onChange={handleChange}/>
     </div>
   )
+}
+
+Component.defaultProps = {
+  value: undefined,
+  doUpdateText: undefined,
+  doUpdateValue: undefined,
+  text: undefined,
+  buttonText: 'PRESS ME!!'
 }
 
 export default wiredUp(Component)

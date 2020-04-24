@@ -186,6 +186,43 @@ const Component = ({
 export default wiredUp(Component)
 ```
 
+If create your component with defaultProps, its important that you declare your redux props store with the same name as the constants ACTIONS_TYPES and SELECTOR_TYPES values. The default value for this specific props will be undefined
+
+## Component With Props
+
+```js
+import React from 'react'
+import { wiredUp } from 'redux-wired'
+
+//The props name has to match with the ACTION_TYPES and SELECTOR_TYPES contanst values
+const Component = ({
+  value1,
+  doUpdate1,
+  ...rest,
+}) => {
+  return (
+    <div>
+      <button onClick={() => doUpdate1(value1 + 1)}>PRESS ME!!</button>
+      <p>{value1}</p>
+    </div>
+  )
+}
+
+//its important to declare all you redux props here, handle your other props as you wish
+Component.defaultProps = {
+  value1: undefined,
+  doUpdate1: undefined,
+  ...otherProps
+}
+
+// the magic happends
+export default wiredUp(Component)
+```
+
+### Troubleshooting
+
+If you experience some issues or bug trying to wired-up your component normally, use instead the defaultProps second example
+
 ## License
 
 [MIT](LICENSE.md)
