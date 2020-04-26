@@ -4,6 +4,15 @@ import getArguments from 'es-arguments'
 
 const WiredContext = createContext(null)
 
+function getDefaultProps(component){
+  if(component.defaultProps){
+    return Object.keys(component.defaultProps)
+  }
+
+  const componentArguments = getComponentProps(component)
+  return Object.values(componentArguments)
+}
+
 function getComponentProps(component) {
   const [args] = getArguments(component)
   let argsArray = args.split(',')
@@ -36,11 +45,10 @@ export const WProvider = ({ wired, children }) => (
 
 export const wiredUp = (WrappedComponent) => (props) => {
   const { actions, selectors } = useContext(WiredContext)
-  const defaultProps = getComponentProps(WrappedComponent)
-  const defaultPropsArray = Object.values(defaultProps)
+  const defaultProps = getDefaultProps(WrappedComponent)
 
   let newProps = props
-  defaultPropsArray.forEach((componentProp) => {
+  defaultProps.forEach((componentProp) => {
     newProps = {
       ...newProps,
       ...useWired(actions, componentProp, useAction),
