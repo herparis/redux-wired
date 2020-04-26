@@ -39,10 +39,21 @@ const updatePropsWithStore = (func, componentProp, handleHook) => ({
   ...func(componentProp, handleHook)
 })
 
+/**
+ * Makes all your actions and selectors available to all your selected components that are wiredUp
+ */
 export const WProvider = ({ wired, children }) => (
   <WiredContext.Provider value={wired}>{children}</WiredContext.Provider>
 )
 
+/**
+ * Accepts any functional component to wired-up to the store, and give them access to the
+ * accions and selectors they need. These components has to have as props the values of the
+ * ACTIONS_TYPES and SELECTORS_TYPES.
+ * 
+ * @example
+ * export default wiredUp(component)
+ */
 export const wiredUp = (WrappedComponent) => (props) => {
   const { actions, selectors } = useContext(WiredContext)
   const defaultProps = getDefaultProps(WrappedComponent)
@@ -59,4 +70,15 @@ export const wiredUp = (WrappedComponent) => (props) => {
   return <WrappedComponent {...newProps} />
 }
 
+/**
+ * Wired-up all your actions and selectors included on the redux store to your selected components
+ *
+ * @returns actions and selectors object
+ * 
+ * @example 
+ * const combineActions = { actions1, actions2, ... }
+ * const combineSelectors = { selectors1, selectors2, ... }
+ * 
+ * const Wired = wired({ combineActions, combineSelectors })
+ */
 export const wired = (actions, selectors) => ({ actions, selectors })
